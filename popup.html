@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="title">密码生成器</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    
+    <!-- MAIN VIEW -->
+    <div id="main-view">
+      <header class="header">
+        <h2 data-i18n="title">密码生成器</h2>
+        <div class="header-controls">
+          <div class="theme-wrapper">
+            <input type="color" id="theme-picker" value="#8400ff">
+            <button id="theme-btn" class="icon-btn" data-i18n-title="themeBtnTitle">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              </svg>
+            </button>
+          </div>
+          <button id="about-btn" class="icon-btn" data-i18n-title="aboutBtnTitle">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="result-container">
+        <input type="text" id="password-output" readonly data-i18n-placeholder="placeholderOutput">
+        <button id="copy-btn" class="icon-btn" data-i18n-title="copyBtnTitle">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        </button>
+      </div>
+      
+      <div class="settings">
+        <div class="form-group">
+          <label for="length"><span data-i18n="length">长度</span>: <span id="length-val">16</span></label>
+          <input type="range" id="length" min="4" max="64" value="16">
+        </div>
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="useUppercase" checked> <span data-i18n="uppercase">大写字母</span></label>
+          <label><input type="checkbox" id="useLowercase" checked> <span data-i18n="lowercase">小写字母</span></label>
+          <label><input type="checkbox" id="useNumbers" checked> <span data-i18n="numbers">数字</span></label>
+          <label><input type="checkbox" id="useSymbols" checked> <span data-i18n="symbols">特殊字符</span></label>
+        </div>
+
+        <div class="form-group">
+          <label for="includeChars" data-i18n="includeChars">指定包含字符:</label>
+          <input type="text" id="includeChars" data-i18n-placeholder="placeholderInclude">
+        </div>
+
+        <div class="form-group">
+          <label for="excludeChars" data-i18n="excludeChars">排除字符:</label>
+          <input type="text" id="excludeChars" data-i18n-placeholder="placeholderExclude">
+        </div>
+      </div>
+
+      <button id="generate-btn" class="primary-btn">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <polyline points="1 20 1 14 7 14"></polyline>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+        </svg>
+        <span data-i18n="generateBtn">生成密码</span>
+      </button>
+      <div id="status-msg"></div>
+    </div>
+
+    <!-- ABOUT VIEW -->
+    <div id="about-view" class="hidden">
+      <header class="header">
+        <button id="back-btn" class="icon-btn" data-i18n-title="backBtnTitle">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+        <h2 data-i18n="aboutTitle">关于</h2>
+        <div style="width: 28px;"></div> <!-- Spacer for alignment -->
+      </header>
+
+      <div class="about-content">
+        <div class="logo-area">
+          <img src="icons/icon48.png" alt="Logo">
+          <h3 data-i18n="title">密码生成器</h3>
+          <div id="app-version" class="version-tag"></div>
+        </div>
+        
+        <p class="author"><strong id="author-link" data-i18n="aboutAuthor">作者：许半仙</strong></p>
+        <div class="divider"></div>
+        <p class="features-text" data-i18n="aboutFeatures">功能特点...</p>
+      </div>
+    </div>
+
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

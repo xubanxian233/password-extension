@@ -1,0 +1,269 @@
+:root {
+  --primary-color: #8400ff;
+  --primary-hover-color: #6a00cc;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  width: 320px;
+  margin: 0;
+  padding: 16px;
+  background-color: #f9f9f9;
+  color: #333;
+  min-height: 400px; /* Ensure consistent height when switching views */
+}
+
+.container {
+  position: relative;
+}
+
+/* Views */
+#main-view, #about-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  height: 32px;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #2c3e50;
+  flex-grow: 1;
+  text-align: left; /* Changed to left since we have controls on the right */
+  padding-left: 4px;
+}
+
+.version-tag {
+  font-size: 12px;
+  color: #999;
+  font-weight: normal;
+  margin-top: 4px;
+}
+
+.header-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.theme-wrapper {
+  position: relative;
+  width: 28px;
+  height: 28px;
+}
+
+#theme-picker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* Buttons */
+.icon-btn {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  cursor: pointer;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  background-color: #fff;
+}
+
+.icon-btn:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.primary-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.primary-btn:hover {
+  background-color: var(--primary-hover-color);
+}
+
+.primary-btn:active {
+  transform: translateY(1px);
+}
+
+/* Main View Elements */
+.result-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+#password-output {
+  flex-grow: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+}
+
+#copy-btn {
+  width: 38px; /* Slightly wider than standard icon-btn */
+  height: 38px;
+}
+
+.settings {
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+input[type="text"] {
+  padding: 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.checkbox-group label {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+#status-msg {
+  text-align: center;
+  font-size: 12px;
+  height: 14px;
+  color: #28a745;
+}
+
+/* About View Elements */
+.about-content {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #eee;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-area {
+  margin-bottom: 16px;
+}
+
+.logo-area img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.logo-area h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.author {
+  font-size: 14px;
+  color: #555;
+  margin: 8px 0;
+}
+
+#author-link {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+#author-link:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #eee;
+  margin: 16px 0;
+}
+
+.features-text {
+  white-space: pre-wrap;
+  font-size: 13px;
+  color: #666;
+  text-align: left;
+  line-height: 1.5;
+  width: 100%;
+}
