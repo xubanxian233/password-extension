@@ -230,23 +230,41 @@ function handlePasswordAction(password, shouldInsert, messages) {
 
   if (shouldInsert) {
     const activeElement = document.activeElement;
+    // Try to find the element that was right-clicked if activeElement is body
+    // Note: 'contextMenus' click doesn't give us the element directly in MV3 executeScript args easily without frameId matching,
+    // but usually the right-clicked element remains focused.
+    
     if (activeElement && (activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA")) {
-      // Insert into input
-      const start = activeElement.selectionStart;
-      const end = activeElement.selectionEnd;
-      const value = activeElement.value;
-      
-      activeElement.value = value.substring(0, start) + password + value.substring(end);
-      
-      // Move cursor to end of inserted text
-      activeElement.selectionStart = activeElement.selectionEnd = start + password.length;
+      // Try using execCommand 'insertText' first as it is more robust for undo/redo
+      activeElement.focus();
+      let inserted = false;
+      try {
+        inserted = document.execCommand('insertText', false, password);
+      } catch (e) {
+        console.log('execCommand insertText failed, falling back to value assignment');
+      }
+
+      if (!inserted) {
+        // Fallback to value assignment
+        const start = activeElement.selectionStart;
+        const end = activeElement.selectionEnd;
+        const value = activeElement.value;
+        
+        activeElement.value = value.substring(0, start) + password + value.substring(end);
+        
+        // Move cursor to end of inserted text
+        activeElement.selectionStart = activeElement.selectionEnd = start + password.length;
+        // Trigger input event for frameworks like React/Vue
+        activeElement.dispatchEvent(new Event('input', { bubbles: true }));
+        activeElement.dispatchEvent(new Event('change', { bubbles: true }));
+      }
       
       // Also copy to clipboard
       copyToClipboard(password).then(() => {
         showToast(messages.msgInsertedCopied);
       });
     } else {
-      // Fallback if no input focused (shouldn't happen with context menu context)
+      // Fallback if no input focused
       copyToClipboard(password).then(() => {
         showToast(messages.msgInsertFailed);
       });
